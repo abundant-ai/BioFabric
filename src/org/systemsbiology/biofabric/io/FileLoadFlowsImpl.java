@@ -551,16 +551,20 @@ public class FileLoadFlowsImpl implements FileLoadFlows {
         String dupLinkFormat = rMan.getString("fabricRead.dupLinkFormat");
         // Ignore shadow link culls: / 2
         String dupLinkMsg = MessageFormat.format(dupLinkFormat, new Object[] {Integer.valueOf(culledLinks.size() / 2)});
-        JOptionPane.showMessageDialog(topWindow_, dupLinkMsg,
-                                      rMan.getString("fabricRead.dupLinkTitle"),
-                                      JOptionPane.WARNING_MESSAGE);
+        if (headlessOracle_ == null) {
+          JOptionPane.showMessageDialog(topWindow_, dupLinkMsg,
+                                        rMan.getString("fabricRead.dupLinkTitle"),
+                                        JOptionPane.WARNING_MESSAGE);
+        } else {
+          System.err.println("Warning: " + dupLinkMsg);
+        }
       }
       
       //
       // For big files, user may want to specify layout options before the default layout with no
       // shadows. Let them set this here:
       //
-      if (!skipShadowQuestion) {
+      if (!skipShadowQuestion && headlessOracle_ == null) {
 	      if (reducedLinks.size() > SIZE_TO_ASK_ABOUT_SHADOWS) {
 		      String shadowMessage = rMan.getString("fabricRead.askAboutShadows");
 		      int doShadow =

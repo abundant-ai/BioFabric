@@ -256,6 +256,11 @@ public class GWImportLoader extends FabricImportLoader {
       if (linksToChange.isEmpty()) { // leave if all links have a normal relation
         return (true);
       }
+
+      // In headless mode (parent == null), skip the dialog and keep the default relation
+      if (parent == null) {
+        return (true);
+      }
       
       LinkRelationDialog dialog = new LinkRelationDialog(parent, DEFAULT_RELATION);
       dialog.setVisible(true);

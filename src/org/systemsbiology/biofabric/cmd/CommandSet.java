@@ -781,6 +781,26 @@ public class CommandSet implements ZoomChangeTracker, SelectionChangeListener, F
   
   /***************************************************************************
   **
+  ** Headless GW import (parallel to HeadlessImportSIFAction)
+  */ 
+   
+  public class HeadlessImportGWAction {
+    
+    private File inputFile_;
+    
+    public HeadlessImportGWAction(File inputFile) {
+      inputFile_ = inputFile;
+    }
+    
+    public boolean performOperation(Object[] args) {
+    	FileLoadFlows.FileLoadResult flr = flf_.loadFromASource(inputFile_, null, null, new UniqueLabeller(), 
+      		                                                    FileLoadFlows.FileLoadType.GW, true);
+      return (flr.getSuccess());
+    }
+  }
+  
+  /***************************************************************************
+  **
   ** Command
   */ 
     

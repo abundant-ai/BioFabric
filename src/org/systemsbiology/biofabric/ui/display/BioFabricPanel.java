@@ -591,7 +591,9 @@ public class BioFabricPanel implements ZoomTarget, ZoomPresentation, Printable,
     currLinkSelections_.clear();
     currNodeSelections_.clear();
     currColSelections_.clear();
-    fmt_.setSelections(null);
+    if (fmt_ != null) {
+      fmt_.setSelections(null);
+    }
     targetList_.clear();
     linkList_.clear();
     floaterSet_.currSelRect = null;
@@ -661,7 +663,9 @@ public class BioFabricPanel implements ZoomTarget, ZoomPresentation, Printable,
       currLinkSelections_.clear();
       currNodeSelections_.clear();
       currColSelections_.clear();
-      fmt_.setSelections(null);
+      if (fmt_ != null) {
+        fmt_.setSelections(null);
+      }
       currSel_ = -1;
       floaterSet_.currSelRect = null;
     }       
@@ -1347,7 +1351,9 @@ public class BioFabricPanel implements ZoomTarget, ZoomPresentation, Printable,
   */
 
   public void installModelPost() { 
-    fmt_.setModel(bfn_);
+    if (fmt_ != null) {
+      fmt_.setModel(bfn_);
+    }
     if (myPanel_ != null) {
       myPanel_.requestFocus();
     }
